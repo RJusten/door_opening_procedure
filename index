@@ -4,323 +4,143 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Türoffnungsprozedere Innenangriff</title>
-    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <script src="https://unpkg.com/reactflow/dist/umd/index.js"></script>
-    <link rel="stylesheet" href="https://unpkg.com/reactflow/dist/style.css" />
     <style>
-      html, body, #root {
+      * { box-sizing: border-box; }
+      body {
         margin: 0;
-        width: 100%;
-        height: 100%;
         font-family: Arial, sans-serif;
         background: #0f172a;
-      }
-
-      .app {
-        width: 100%;
-        height: 100%;
-      }
-
-      .titlebar {
-        position: absolute;
-        top: 16px;
-        left: 16px;
-        z-index: 10;
-        background: rgba(15, 23, 42, 0.9);
         color: white;
-        padding: 12px 16px;
-        border-radius: 12px;
-        border: 1px solid rgba(255,255,255,0.12);
-        box-shadow: 0 8px 24px rgba(0,0,0,0.25);
       }
-
-      .titlebar h1 {
-        margin: 0 0 4px 0;
-        font-size: 18px;
+      .wrap {
+        padding: 24px;
+        overflow: auto;
       }
-
-      .titlebar p {
-        margin: 0;
-        font-size: 13px;
+      h1 {
+        margin: 0 0 24px 0;
+        font-size: 28px;
+      }
+      .chart {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 24px;
+        min-width: 1200px;
+      }
+      .row {
+        display: flex;
+        justify-content: center;
+        gap: 80px;
+        width: 100%;
+      }
+      .box, .decision {
+        background: #1f2937;
+        border: 1px solid #475569;
+        border-radius: 14px;
+        padding: 14px 18px;
+        min-width: 260px;
+        max-width: 320px;
+        text-align: center;
+        box-shadow: 0 8px 22px rgba(0,0,0,0.25);
+      }
+      .blue { background: #1d4ed8; }
+      .red { background: #b91c1c; }
+      .green { background: #166534; }
+      .orange { background: #92400e; }
+      .brown { background: #7c2d12; }
+      .teal { background: #0f766e; }
+      .decision {
+        background: #334155;
+        font-weight: bold;
+      }
+      .connector {
+        font-size: 24px;
+        line-height: 1;
+        color: #94a3b8;
+      }
+      .branch {
+        display: flex;
+        justify-content: space-between;
+        gap: 80px;
+        width: 100%;
+      }
+      .column {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 18px;
+        flex: 1;
+      }
+      .label {
         color: #cbd5e1;
+        font-weight: bold;
+        margin-bottom: -8px;
       }
     </style>
   </head>
   <body>
-    <div id="root"></div>
+    <div class="wrap">
+      <h1>Türoffnungsprozedere Innenangriff</h1>
 
-    <script type="text/babel">
-      const {
-        ReactFlow,
-        Background,
-        Controls,
-        MiniMap,
-        MarkerType
-      } = window.ReactFlow;
-      const { useMemo } = React;
+      <div class="chart">
+        <div class="box">Türoffnungsprozedere Innenangriff</div>
+        <div class="connector">↓</div>
+        <div class="decision">Öffnungsrichtung?</div>
+        <div class="connector">↓</div>
 
-      function App() {
-        const nodes = useMemo(() => [
-          {
-            id: "A",
-            position: { x: 420, y: 20 },
-            data: { label: "Türoffnungsprozedere Innenangriff" },
-            style: {
-              background: "#111827",
-              color: "#fff",
-              border: "1px solid #334155",
-              borderRadius: "14px",
-              padding: "10px",
-              width: 260,
-              textAlign: "center",
-              fontWeight: "700"
-            }
-          },
-          {
-            id: "B",
-            position: { x: 470, y: 120 },
-            data: { label: "Öffnungsrichtung?" },
-            style: {
-              background: "#1e293b",
-              color: "#fff",
-              border: "1px solid #475569",
-              borderRadius: "14px",
-              width: 160,
-              textAlign: "center",
-              fontWeight: "600"
-            }
-          },
-
-          {
-            id: "C1",
-            position: { x: 90, y: 240 },
-            data: { label: "Positionierung: TF Türgriffseite / SF Scharnierseite" },
-            style: nodeStyle("#1d4ed8")
-          },
-          {
-            id: "C2",
-            position: { x: 90, y: 340 },
-            data: { label: "Bandschlinge am Türgriff anbringen / Rauchverschluss setzen" },
-            style: nodeStyle()
-          },
-          {
-            id: "C3",
-            position: { x: 90, y: 440 },
-            data: { label: "Truppführer kündigt Öffnen an" },
-            style: nodeStyle()
-          },
-          {
-            id: "C4",
-            position: { x: 90, y: 540 },
-            data: { label: "Truppführer öffnet die Tür kontrolliert" },
-            style: nodeStyle()
-          },
-
-          {
-            id: "D1",
-            position: { x: 760, y: 240 },
-            data: { label: "Positionierung: TF Scharnierseite / SF Türgriffseite" },
-            style: nodeStyle("#b91c1c")
-          },
-          {
-            id: "D2",
-            position: { x: 760, y: 340 },
-            data: { label: "Bandschlinge am Türgriff anbringen" },
-            style: nodeStyle()
-          },
-          {
-            id: "D3",
-            position: { x: 760, y: 440 },
-            data: { label: "Truppführer kündigt Öffnen an" },
-            style: nodeStyle()
-          },
-          {
-            id: "D4",
-            position: { x: 760, y: 540 },
-            data: { label: "Tür kontrolliert aufziehen und mit Fuß sichern" },
-            style: nodeStyle()
-          },
-          {
-            id: "D5",
-            position: { x: 760, y: 640 },
-            data: { label: "Rauchverschluss setzen" },
-            style: nodeStyle()
-          },
-
-          {
-            id: "E1",
-            position: { x: 420, y: 760 },
-            data: { label: "Truppführer tritt unter Deckung des Strahlrohrführers in den Raum" },
-            style: nodeStyle("#0f766e", 320)
-          },
-
-          {
-            id: "P1",
-            position: { x: 420, y: 880 },
-            data: { label: "Personen im Nahbereich?" },
-            style: decisionStyle()
-          },
-          {
-            id: "P1a",
-            position: { x: 120, y: 1000 },
-            data: { label: "Personenrettung einleiten" },
-            style: nodeStyle("#92400e")
-          },
-
-          {
-            id: "P2",
-            position: { x: 420, y: 1120 },
-            data: { label: "Rauch sichtbar?" },
-            style: decisionStyle()
-          },
-          {
-            id: "P2a",
-            position: { x: 120, y: 1240 },
-            data: { label: "Rauchgaskühlung durchführen" },
-            style: nodeStyle("#92400e")
-          },
-
-          {
-            id: "P3",
-            position: { x: 420, y: 1360 },
-            data: { label: "Feuerschein sichtbar?" },
-            style: decisionStyle()
-          },
-          {
-            id: "P3a",
-            position: { x: 760, y: 1480 },
-            data: { label: "Brandbekämpfung einleiten" },
-            style: nodeStyle("#166534")
-          },
-
-          {
-            id: "P4",
-            position: { x: 420, y: 1480 },
-            data: { label: "Raumgeometrie beurteilen" },
-            style: nodeStyle()
-          },
-          {
-            id: "P5",
-            position: { x: 420, y: 1600 },
-            data: { label: "Trupp geht in den Brandraum vor" },
-            style: nodeStyle("#166534", 250)
-          },
-
-          {
-            id: "Z",
-            position: { x: 120, y: 780 },
-            data: { label: "Tür schließen" },
-            style: nodeStyle("#7c2d12", 170)
-          },
-          {
-            id: "R",
-            position: { x: 120, y: 660 },
-            data: { label: "Truppführer kündigt Öffnen an und öffnet die Tür" },
-            style: nodeStyle("#7c2d12", 250)
-          }
-        ], []);
-
-        const edges = useMemo(() => [
-          edge("A", "B"),
-
-          edge("B", "C1", "Nach innen"),
-          edge("C1", "C2"),
-          edge("C2", "C3"),
-          edge("C3", "C4"),
-          edge("C4", "E1"),
-
-          edge("B", "D1", "Nach außen"),
-          edge("D1", "D2"),
-          edge("D2", "D3"),
-          edge("D3", "D4"),
-          edge("D4", "D5"),
-          edge("D5", "E1"),
-
-          edge("E1", "P1"),
-          edge("P1", "P1a", "Ja"),
-          edge("P1a", "Z"),
-          edge("P1", "P2", "Nein"),
-
-          edge("P2", "P2a", "Ja"),
-          edge("P2a", "Z"),
-          edge("P2", "P3", "Nein"),
-
-          edge("P3", "P3a", "Ja"),
-          edge("P3a", "P5"),
-          edge("P3", "P4", "Nein"),
-          edge("P4", "P5"),
-
-          edge("Z", "R"),
-          edge("R", "E1")
-        ], []);
-
-        return (
-          <div className="app">
-            <div className="titlebar">
-              <h1>Türoffnungsprozedere</h1>
-              <p>Interaktive Startversion mit React Flow</p>
-            </div>
-            <ReactFlow nodes={nodes} edges={edges} fitView>
-              <MiniMap />
-              <Controls />
-              <Background />
-            </ReactFlow>
+        <div class="branch">
+          <div class="column">
+            <div class="label">Nach innen</div>
+            <div class="box blue">Positionierung: TF Türgriffseite / SF Scharnierseite</div>
+            <div class="connector">↓</div>
+            <div class="box">Bandschlinge am Türgriff anbringen / Rauchverschluss setzen</div>
+            <div class="connector">↓</div>
+            <div class="box">Truppführer kündigt Öffnen an</div>
+            <div class="connector">↓</div>
+            <div class="box">Truppführer öffnet die Tür kontrolliert</div>
           </div>
-        );
-      }
 
-      function nodeStyle(bg = "#1f2937", width = 240) {
-        return {
-          background: bg,
-          color: "#fff",
-          border: "1px solid rgba(255,255,255,0.18)",
-          borderRadius: "14px",
-          padding: "10px",
-          width,
-          textAlign: "center",
-          fontSize: "13px",
-          lineHeight: "1.3",
-          boxShadow: "0 8px 22px rgba(0,0,0,0.22)"
-        };
-      }
+          <div class="column">
+            <div class="label">Nach außen</div>
+            <div class="box red">Positionierung: TF Scharnierseite / SF Türgriffseite</div>
+            <div class="connector">↓</div>
+            <div class="box">Bandschlinge am Türgriff anbringen</div>
+            <div class="connector">↓</div>
+            <div class="box">Truppführer kündigt Öffnen an</div>
+            <div class="connector">↓</div>
+            <div class="box">Tür kontrolliert aufziehen und mit Fuß sichern</div>
+            <div class="connector">↓</div>
+            <div class="box">Rauchverschluss setzen</div>
+          </div>
+        </div>
 
-      function decisionStyle() {
-        return {
-          background: "#334155",
-          color: "#fff",
-          border: "1px solid rgba(255,255,255,0.18)",
-          borderRadius: "14px",
-          padding: "10px",
-          width: 220,
-          textAlign: "center",
-          fontSize: "13px",
-          fontWeight: "700",
-          boxShadow: "0 8px 22px rgba(0,0,0,0.22)"
-        };
-      }
+        <div class="connector">↓</div>
+        <div class="box teal">Truppführer tritt unter Deckung des Strahlrohrführers in den Raum</div>
+        <div class="connector">↓</div>
+        <div class="decision">Personen im Nahbereich?</div>
 
-      function edge(source, target, label) {
-        return {
-          id: `${source}-${target}`,
-          source,
-          target,
-          label,
-          markerEnd: {
-            type: MarkerType.ArrowClosed
-          },
-          style: {
-            strokeWidth: 2
-          },
-          labelStyle: {
-            fill: "#e2e8f0",
-            fontWeight: 700
-          }
-        };
-      }
+        <div class="branch">
+          <div class="column">
+            <div class="label">Ja</div>
+            <div class="box orange">Personenrettung einleiten</div>
+            <div class="connector">↓</div>
+            <div class="box brown">Tür schließen</div>
+            <div class="connector">↓</div>
+            <div class="box brown">Truppführer kündigt Öffnen an und öffnet die Tür</div>
+          </div>
 
-      ReactDOM.createRoot(document.getElementById("root")).render(<App />);
-    </script>
+          <div class="column">
+            <div class="label">Nein</div>
+            <div class="decision">Rauch sichtbar?</div>
+            <div class="connector">↓</div>
+            <div class="decision">Feuerschein sichtbar?</div>
+            <div class="connector">↓</div>
+            <div class="box">Raumgeometrie beurteilen</div>
+            <div class="connector">↓</div>
+            <div class="box green">Trupp geht in den Brandraum vor</div>
+          </div>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
