@@ -27,12 +27,6 @@
         gap: 24px;
         min-width: 1200px;
       }
-      .row {
-        display: flex;
-        justify-content: center;
-        gap: 80px;
-        width: 100%;
-      }
       .box, .decision {
         background: #1f2937;
         border: 1px solid #475569;
@@ -43,17 +37,14 @@
         text-align: center;
         box-shadow: 0 8px 22px rgba(0,0,0,0.25);
       }
-      .blue { background: #1d4ed8; }
-      .red { background: #b91c1c; }
-      .green { background: #166534; }
-      .orange { background: #92400e; }
-      .brown { background: #7c2d12; }
-      .teal { background: #0f766e; }
-
       .decision {
         background: #334155;
         font-weight: bold;
       }
+      .green { background: #166534; }
+      .orange { background: #92400e; }
+      .brown { background: #7c2d12; }
+      .teal { background: #0f766e; }
 
       .connector {
         font-size: 24px;
@@ -90,11 +81,13 @@
       <div class="chart">
         <div class="decision">Öffnungsrichtung?</div>
         <div class="connector">↓</div>
+        <div class="decision">Nach innen / Nach außen?</div>
+        <div class="connector">↓</div>
 
         <div class="branch">
           <div class="column">
             <div class="label">Nach innen</div>
-            <div class="box blue">Positionierung: TF Türgriffseite / SF Scharnierseite</div>
+            <div class="box">Positionierung: TF Türgriffseite / SF Scharnierseite</div>
             <div class="connector">↓</div>
             <div class="box">Bandschlinge am Türgriff anbringen / Rauchverschluss setzen</div>
             <div class="connector">↓</div>
@@ -105,7 +98,7 @@
 
           <div class="column">
             <div class="label">Nach außen</div>
-            <div class="box red">Positionierung: TF Scharnierseite / SF Türgriffseite</div>
+            <div class="box">Positionierung: TF Scharnierseite / SF Türgriffseite</div>
             <div class="connector">↓</div>
             <div class="box">Bandschlinge am Türgriff anbringen</div>
             <div class="connector">↓</div>
