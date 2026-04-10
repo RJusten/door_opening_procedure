@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Türoffnungsprozedere Innenangriff</title>
+
     <style>
       * { box-sizing: border-box; }
 
@@ -32,8 +33,7 @@
         min-width: 1200px;
       }
 
-      .box,
-      .decision {
+      .box, .decision {
         background: #1f2937;
         border: 1px solid #475569;
         border-radius: 14px;
@@ -57,7 +57,6 @@
 
       .connector {
         font-size: 24px;
-        line-height: 1;
         color: #94a3b8;
       }
 
@@ -81,17 +80,46 @@
         font-weight: bold;
         margin-bottom: -8px;
       }
+
+      /* NEW: merge connectors */
+      .merge {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        max-width: 900px;
+        align-items: center;
+      }
+
+      .merge .line {
+        flex: 1;
+        height: 2px;
+        background: #94a3b8;
+      }
+
+      .merge .down {
+        margin: 0 12px;
+        color: #94a3b8;
+      }
     </style>
   </head>
+
   <body>
     <div class="wrap">
       <h1>Türoffnungsprozedere Innenangriff</h1>
 
       <div class="chart">
-        <div class="decision">Öffnungsrichtung: Nach innen / Nach außen?</div>
+
+        <!-- TOP DECISION -->
+        <div class="decision">
+          Öffnungsrichtung?<br>
+          Nach innen / Nach außen
+        </div>
         <div class="connector">↓</div>
 
+        <!-- BRANCHES -->
         <div class="branch">
+
+          <!-- NACH INNEN -->
           <div class="column">
             <div class="label">Nach innen</div>
             <div class="box">
@@ -107,6 +135,7 @@
             <div class="box">Truppführer öffnet die Tür kontrolliert</div>
           </div>
 
+          <!-- NACH AUSSEN -->
           <div class="column">
             <div class="label">Nach außen</div>
             <div class="box">
@@ -123,12 +152,24 @@
             <div class="connector">↓</div>
             <div class="box">Rauchverschluss setzen</div>
           </div>
+
+        </div>
+
+        <!-- NEW: MERGED CONNECTION -->
+        <div class="merge">
+          <div class="line"></div>
+          <div class="down">↓</div>
+          <div class="line"></div>
+        </div>
+
+        <!-- COMMON STEP -->
+        <div class="box teal">
+          Truppführer tritt unter Deckung des Strahlrohrführers in den Raum
         </div>
 
         <div class="connector">↓</div>
-        <div class="box teal">Truppführer tritt unter Deckung des Strahlrohrführers in den Raum</div>
-        <div class="connector">↓</div>
 
+        <!-- NEXT DECISION -->
         <div class="decision">Personen im Nahbereich?</div>
 
         <div class="branch">
@@ -152,6 +193,7 @@
             <div class="box green">Trupp geht in den Brandraum vor</div>
           </div>
         </div>
+
       </div>
     </div>
   </body>
