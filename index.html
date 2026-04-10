@@ -6,7 +6,9 @@
     <title>Türoffnungsprozedere Innenangriff</title>
 
     <style>
-      * { box-sizing: border-box; }
+      * {
+        box-sizing: border-box;
+      }
 
       body {
         margin: 0;
@@ -26,14 +28,15 @@
       }
 
       .chart {
+        min-width: 1200px;
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 24px;
-        min-width: 1200px;
+        gap: 22px;
       }
 
-      .box, .decision {
+      .box,
+      .decision {
         background: #1f2937;
         border: 1px solid #475569;
         border-radius: 14px;
@@ -41,7 +44,7 @@
         min-width: 260px;
         max-width: 320px;
         text-align: center;
-        box-shadow: 0 8px 22px rgba(0,0,0,0.25);
+        box-shadow: 0 8px 22px rgba(0, 0, 0, 0.25);
         line-height: 1.35;
       }
 
@@ -57,48 +60,77 @@
 
       .connector {
         font-size: 24px;
+        line-height: 1;
         color: #94a3b8;
       }
 
       .branch {
+        width: 100%;
         display: flex;
         justify-content: space-between;
-        gap: 80px;
-        width: 100%;
+        gap: 120px;
+        align-items: flex-start;
       }
 
       .column {
+        flex: 1;
         display: flex;
         flex-direction: column;
         align-items: center;
         gap: 18px;
-        flex: 1;
       }
 
       .label {
         color: #cbd5e1;
         font-weight: bold;
-        margin-bottom: -8px;
+        margin-bottom: -4px;
       }
 
-      /* NEW: merge connectors */
-      .merge {
-        display: flex;
-        justify-content: space-between;
+      .merge-wrap {
         width: 100%;
-        max-width: 900px;
+        display: grid;
+        grid-template-columns: 1fr 360px 1fr;
+        align-items: start;
+        column-gap: 40px;
+        margin-top: 6px;
+      }
+
+      .merge-side {
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        min-height: 72px;
+        position: relative;
+      }
+
+      .merge-side svg {
+        width: 100%;
+        max-width: 420px;
+        height: 72px;
+        overflow: visible;
+      }
+
+      .merge-center {
+        display: flex;
+        flex-direction: column;
         align-items: center;
+        gap: 16px;
       }
 
-      .merge .line {
-        flex: 1;
-        height: 2px;
-        background: #94a3b8;
+      .merge-center .box {
+        min-width: 360px;
+        max-width: 420px;
       }
 
-      .merge .down {
-        margin: 0 12px;
-        color: #94a3b8;
+      .decision-small {
+        min-width: 220px;
+        max-width: 280px;
+      }
+
+      @media (max-width: 1100px) {
+        .chart {
+          min-width: 1100px;
+        }
       }
     </style>
   </head>
@@ -108,69 +140,116 @@
       <h1>Türoffnungsprozedere Innenangriff</h1>
 
       <div class="chart">
-
-        <!-- TOP DECISION -->
         <div class="decision">
           Öffnungsrichtung?<br>
           Nach innen / Nach außen
         </div>
+
         <div class="connector">↓</div>
 
-        <!-- BRANCHES -->
         <div class="branch">
-
-          <!-- NACH INNEN -->
           <div class="column">
             <div class="label">Nach innen</div>
+
             <div class="box">
               Positionierung<br>
               TF: Türgriffseite<br>
               SF: Scharnierseite
             </div>
+
             <div class="connector">↓</div>
-            <div class="box">Bandschlinge am Türgriff anbringen / Rauchverschluss setzen</div>
+
+            <div class="box">
+              Bandschlinge am Türgriff anbringen / Rauchverschluss setzen
+            </div>
+
             <div class="connector">↓</div>
+
             <div class="box">Truppführer kündigt Öffnen an</div>
+
             <div class="connector">↓</div>
+
             <div class="box">Truppführer öffnet die Tür kontrolliert</div>
           </div>
 
-          <!-- NACH AUSSEN -->
           <div class="column">
             <div class="label">Nach außen</div>
+
             <div class="box">
               Positionierung<br>
               TF: Scharnierseite<br>
               SF: Türgriffseite
             </div>
+
             <div class="connector">↓</div>
+
             <div class="box">Bandschlinge am Türgriff anbringen</div>
+
             <div class="connector">↓</div>
+
             <div class="box">Truppführer kündigt Öffnen an</div>
+
             <div class="connector">↓</div>
+
             <div class="box">Tür kontrolliert aufziehen und mit Fuß sichern</div>
+
             <div class="connector">↓</div>
+
             <div class="box">Rauchverschluss setzen</div>
           </div>
-
         </div>
 
-        <!-- NEW: MERGED CONNECTION -->
-        <div class="merge">
-          <div class="line"></div>
-          <div class="down">↓</div>
-          <div class="line"></div>
+        <div class="merge-wrap">
+          <div class="merge-side">
+            <svg viewBox="0 0 420 72" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path
+                d="M210 0 L210 24 L360 24 L360 58"
+                fill="none"
+                stroke="#94a3b8"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M353 50 L360 58 L367 50"
+                fill="none"
+                stroke="#94a3b8"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </div>
+
+          <div class="merge-center">
+            <div class="box teal">
+              Truppführer tritt unter Deckung des Strahlrohrführers in den Raum
+            </div>
+            <div class="connector">↓</div>
+            <div class="decision decision-small">Personen im Nahbereich?</div>
+          </div>
+
+          <div class="merge-side">
+            <svg viewBox="0 0 420 72" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path
+                d="M210 0 L210 24 L60 24 L60 58"
+                fill="none"
+                stroke="#94a3b8"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M53 50 L60 58 L67 50"
+                fill="none"
+                stroke="#94a3b8"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </div>
         </div>
-
-        <!-- COMMON STEP -->
-        <div class="box teal">
-          Truppführer tritt unter Deckung des Strahlrohrführers in den Raum
-        </div>
-
-        <div class="connector">↓</div>
-
-        <!-- NEXT DECISION -->
-        <div class="decision">Personen im Nahbereich?</div>
 
         <div class="branch">
           <div class="column">
@@ -193,7 +272,6 @@
             <div class="box green">Trupp geht in den Brandraum vor</div>
           </div>
         </div>
-
       </div>
     </div>
   </body>
