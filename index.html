@@ -6,20 +6,24 @@
     <title>Türoffnungsprozedere Innenangriff</title>
     <style>
       * { box-sizing: border-box; }
+
       body {
         margin: 0;
         font-family: Arial, sans-serif;
         background: #0f172a;
         color: white;
       }
+
       .wrap {
         padding: 24px;
         overflow: auto;
       }
+
       h1 {
         margin: 0 0 24px 0;
         font-size: 28px;
       }
+
       .chart {
         display: flex;
         flex-direction: column;
@@ -27,7 +31,9 @@
         gap: 24px;
         min-width: 1200px;
       }
-      .box, .decision {
+
+      .box,
+      .decision {
         background: #1f2937;
         border: 1px solid #475569;
         border-radius: 14px;
@@ -36,11 +42,14 @@
         max-width: 320px;
         text-align: center;
         box-shadow: 0 8px 22px rgba(0,0,0,0.25);
+        line-height: 1.35;
       }
+
       .decision {
         background: #334155;
         font-weight: bold;
       }
+
       .green { background: #166534; }
       .orange { background: #92400e; }
       .brown { background: #7c2d12; }
@@ -79,15 +88,17 @@
       <h1>Türoffnungsprozedere Innenangriff</h1>
 
       <div class="chart">
-        <div class="decision">Öffnungsrichtung?</div>
-        <div class="connector">↓</div>
-        <div class="decision">Nach innen / Nach außen?</div>
+        <div class="decision">Öffnungsrichtung: Nach innen / Nach außen?</div>
         <div class="connector">↓</div>
 
         <div class="branch">
           <div class="column">
             <div class="label">Nach innen</div>
-            <div class="box">Positionierung: TF Türgriffseite / SF Scharnierseite</div>
+            <div class="box">
+              Positionierung<br>
+              TF: Türgriffseite<br>
+              SF: Scharnierseite
+            </div>
             <div class="connector">↓</div>
             <div class="box">Bandschlinge am Türgriff anbringen / Rauchverschluss setzen</div>
             <div class="connector">↓</div>
@@ -98,7 +109,11 @@
 
           <div class="column">
             <div class="label">Nach außen</div>
-            <div class="box">Positionierung: TF Scharnierseite / SF Türgriffseite</div>
+            <div class="box">
+              Positionierung<br>
+              TF: Scharnierseite<br>
+              SF: Türgriffseite
+            </div>
             <div class="connector">↓</div>
             <div class="box">Bandschlinge am Türgriff anbringen</div>
             <div class="connector">↓</div>
